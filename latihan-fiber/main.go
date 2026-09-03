@@ -21,5 +21,14 @@ func main() {
 		})
 	})
 
+	// Tugas 1: Endpoint GET /api/mahasiswa
+	app.Get("/api/mahasiswa", func(c fiber.Ctx) error {
+		return c.JSON(fiber.Map{
+			"nim":           "H1H024022",
+			"nama":          "Dedi",
+			"program_studi": "Teknik Komputer",
+		})
+	})
+
 	log.Fatal(app.Listen(":3000"))
 }
