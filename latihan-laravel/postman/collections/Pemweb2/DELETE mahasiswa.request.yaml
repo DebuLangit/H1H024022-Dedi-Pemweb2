@@ -1,0 +1,7 @@
+$kind: http-request
+description: ""
+url: "{{base_url}}/mahasiswa/32"
+method: DELETE
+headers:
+  Accept: application/json
+order: 2000

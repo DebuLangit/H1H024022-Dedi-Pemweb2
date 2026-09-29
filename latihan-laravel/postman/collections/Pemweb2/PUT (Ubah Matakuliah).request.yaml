@@ -1,0 +1,10 @@
+$kind: http-request
+url: http://127.0.0.1:8000/api/matakuliah/1
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: '{"sks": 4}'
+order: 3290033340052482

@@ -1,0 +1,11 @@
+$kind: http-request
+description: ""
+url: "{{base_url}}/mahasiswa/32"
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: "{\r\n    \"ipk\": 3.90\r\n}"
+order: 1000

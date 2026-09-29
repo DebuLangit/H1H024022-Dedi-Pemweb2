@@ -1,0 +1,5 @@
+$kind: http-request
+description: ""
+url: "{{base_url}}/mahasiswa"
+method: GET
+order: 4000

@@ -1,0 +1,25 @@
+$kind: http-request
+description: ""
+url: "{{base_url}}/mahasiswa"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: "{\r
+
+    \  \"program_studi_id\": 1,\r
+
+    \  \"nim\": \"H1A125999\",\r
+
+    \  \"nama\": \"Dewi Anggraini\",\r
+
+    \  \"email\": \"dewi.anggraini@example.com\",\r
+
+    \  \"angkatan\": 2025,\r
+
+    \  \"ipk\": 3.65\r
+
+    }\r\n"
+order: 5000

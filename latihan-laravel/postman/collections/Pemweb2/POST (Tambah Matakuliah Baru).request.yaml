@@ -1,0 +1,10 @@
+$kind: http-request
+url: http://127.0.0.1:8000/api/matakuliah
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: '{"kode": "MK100", "nama": "Jaringan Komputer", "sks": 3, "semester": 4}'
+order: 2672317105703303

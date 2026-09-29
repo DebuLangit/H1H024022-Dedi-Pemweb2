@@ -1,0 +1,10 @@
+$kind: http-request
+description: ""
+url: "{{base_url}}/mahasiswa?angkatan=2023&per_halaman=5&urut=ipk&arah=desc"
+method: GET
+queryParams:
+  angkatan: "2023"
+  per_halaman: "5"
+  urut: ipk
+  arah: desc
+order: 3538

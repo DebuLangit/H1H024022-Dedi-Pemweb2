@@ -1,0 +1,214 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pemweb2 API.postman_collection",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "{{base_url}}"
+    },
+    {
+      "url": "http://127.0.0.1:8000"
+    },
+    {
+      "url": ""
+    }
+  ],
+  "paths": {
+    "/mahasiswa/32": {
+      "put": {
+        "summary": "PUT update mahasiswa",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ipk": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": {
+                "ipk": 3.9
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "DELETE mahasiswa",
+        "responses": {}
+      }
+    },
+    "/mahasiswa": {
+      "get": {
+        "summary": "GET mahasiswa angkatan 2023",
+        "parameters": [
+          {
+            "name": "angkatan",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 2023
+          },
+          {
+            "name": "per_halaman",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 5
+          },
+          {
+            "name": "urut",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ipk"
+          },
+          {
+            "name": "arah",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "desc"
+          }
+        ],
+        "responses": {}
+      },
+      "post": {
+        "summary": "POST tambah mahasiswa",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "program_studi_id": {
+                    "type": "integer"
+                  },
+                  "nim": {
+                    "type": "string"
+                  },
+                  "nama": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "angkatan": {
+                    "type": "integer"
+                  },
+                  "ipk": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": {
+                "program_studi_id": 1,
+                "nim": "H1A125999",
+                "nama": "Dewi Anggraini",
+                "email": "dewi.anggraini@example.com",
+                "angkatan": 2025,
+                "ipk": 3.65
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mahasiswa/99999": {
+      "get": {
+        "summary": "GET ID anomali",
+        "responses": {}
+      }
+    },
+    "/api/matakuliah": {
+      "post": {
+        "summary": "POST (Tambah Matakuliah Baru)",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "kode": {
+                    "type": "string"
+                  },
+                  "nama": {
+                    "type": "string"
+                  },
+                  "sks": {
+                    "type": "integer"
+                  },
+                  "semester": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "kode": "MK100",
+                "nama": "Jaringan Komputer",
+                "sks": 3,
+                "semester": 4
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "GET (Lihat Daftar Matakuliah)",
+        "responses": {}
+      }
+    },
+    "/api/matakuliah/1": {
+      "put": {
+        "summary": "PUT (Ubah Matakuliah)",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sks": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "sks": 4
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "DELETE (Hapus Matakuliah)",
+        "responses": {}
+      }
+    },
+    "/api/program-studi/1/mahasiswa": {
+      "get": {
+        "summary": "GET Mahasiswa Berdasarkan Program Studi",
+        "responses": {}
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "GET Parameter fields",
+        "responses": {}
+      }
+    }
+  }
+}

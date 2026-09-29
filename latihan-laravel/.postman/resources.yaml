@@ -1,0 +1,8 @@
+workspace:
+  id: 7875bbe5-5a11-4bf7-8bc1-d99ffb9f677e
+localResources:
+  specs:
+    - ../postman/specs/Pemweb2 API.postman_collection/Pemweb2 API.postman_collection.json
+resourceNameMappings:
+  specs:
+    - ../postman/specs/Pemweb2 API.postman_collection/Pemweb2 API.postman_collection.json: Pemweb2 API.postman_collection
