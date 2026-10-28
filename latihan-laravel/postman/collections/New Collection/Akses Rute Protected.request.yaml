@@ -1,0 +1,8 @@
+$kind: http-request
+url: http://127.0.0.1:8000/api/auth/profil
+method: GET
+headers:
+  Accept: application/json
+auth:
+  type: bearer
+order: 3000

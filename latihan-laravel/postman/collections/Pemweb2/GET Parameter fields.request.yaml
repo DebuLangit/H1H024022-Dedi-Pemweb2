@@ -1,4 +1,6 @@
 $kind: http-request
-url: ""
+url: http://127.0.0.1:8000/api/mahasiswa?fields=nim,nama,angkatan
 method: GET
-order: 4460911873574792
+queryParams:
+  fields: nim,nama,angkatan
+order: 12000

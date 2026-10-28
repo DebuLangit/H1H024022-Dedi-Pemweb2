@@ -7,4 +7,4 @@ headers:
 body:
   type: json
   content: '{"kode": "MK100", "nama": "Jaringan Komputer", "sks": 3, "semester": 4}'
-order: 2672317105703303
+order: 7000
