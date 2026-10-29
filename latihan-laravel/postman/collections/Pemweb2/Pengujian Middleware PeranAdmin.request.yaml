@@ -1,8 +1,0 @@
-$kind: http-request
-url: http://127.0.0.1:8000/api/mahasiswa/25
-method: DELETE
-auth:
-  type: bearer
-  credentials:
-    token: 10|vGMICfJrVAka5iqIkhFj4kDwXUk52BFCsZqKMek8e0ef9b2f
-order: 18000
