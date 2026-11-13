@@ -4,6 +4,7 @@ import (
 	"github.com/gofiber/fiber/v3"
 
 	"latihan-fiber-api/internal/handler"
+	"latihan-fiber-api/internal/middleware"
 )
 
 func Daftarkan(app *fiber.App, kunciAPI string) {
@@ -18,14 +19,24 @@ func Daftarkan(app *fiber.App, kunciAPI string) {
 
 	api.Get("/program-studi", handler.DaftarProgramStudi)
 
-	mahasiswa := api.Group("/mahasiswa")
+	// Rute autentikasi publik
+	api.Post("/auth/registrasi", handler.Registrasi)
+	api.Post("/auth/login", handler.Login)
+
+	// Grup rute yang dilindungi middleware JWT
+	terlindungi := api.Group("", middleware.Autentikasi())
+	terlindungi.Get("/auth/profil", handler.Profil)
+	terlindungi.Post("/auth/segarkan", handler.Segarkan)
+	terlindungi.Post("/auth/logout", handler.Logout)
+
+	mahasiswa := terlindungi.Group("/mahasiswa")
 	mahasiswa.Get("/", handler.DaftarMahasiswa)
-	mahasiswa.Post("/", handler.BuatMahasiswa)
 	mahasiswa.Get("/terhapus", handler.DaftarMahasiswaTerhapus)
 	mahasiswa.Get("/:id", handler.DetailMahasiswa)
-	mahasiswa.Put("/:id", handler.PerbaruiMahasiswa)
-	mahasiswa.Delete("/:id", handler.HapusMahasiswa)
-	mahasiswa.Post("/:id/pulihkan", handler.PulihkanMahasiswa)
+	mahasiswa.Post("/", middleware.HanyaPeran("admin", "dosen"), handler.BuatMahasiswa)
+	mahasiswa.Put("/:id", middleware.HanyaPeran("admin", "dosen"), handler.PerbaruiMahasiswa)
+	mahasiswa.Delete("/:id", middleware.HanyaPeran("admin"), handler.HapusMahasiswa)
+	mahasiswa.Post("/:id/pulihkan", middleware.HanyaPeran("admin"), handler.PulihkanMahasiswa)
 
 	matakuliah := api.Group("/matakuliah")
 	matakuliah.Get("/", handler.DaftarMatakuliah)

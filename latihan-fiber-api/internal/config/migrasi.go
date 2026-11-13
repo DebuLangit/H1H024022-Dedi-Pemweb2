@@ -3,11 +3,19 @@ package config
 import (
 	"log"
 
+	"golang.org/x/crypto/bcrypt"
+
 	"latihan-fiber-api/internal/model"
 )
 
 func Migrasi() {
-	err := DB.AutoMigrate(&model.ProgramStudi{}, &model.Mahasiswa{}, &model.Matakuliah{})
+	err := DB.AutoMigrate(
+		&model.ProgramStudi{},
+		&model.Mahasiswa{},
+		&model.Matakuliah{},
+		&model.Pengguna{},
+		&model.DaftarHitamToken{},
+	)
 	if err != nil {
 		log.Fatal("Gagal menjalankan migrasi: ", err)
 	}
@@ -42,5 +50,22 @@ func DataAwal() {
 
 		DB.Create(&daftarMk)
 		log.Println("Data awal matakuliah dibuat")
+	}
+
+	var jumlahPengguna int64
+	DB.Model(&model.Pengguna{}).Count(&jumlahPengguna)
+	if jumlahPengguna == 0 {
+		hashAdmin, _ := bcrypt.GenerateFromPassword([]byte("admin123"), bcrypt.DefaultCost)
+		hashDosen, _ := bcrypt.GenerateFromPassword([]byte("dosen123"), bcrypt.DefaultCost)
+		hashMhs, _ := bcrypt.GenerateFromPassword([]byte("mahasiswa123"), bcrypt.DefaultCost)
+
+		daftarPengguna := []model.Pengguna{
+			{Nama: "Administrator", Email: "admin@example.com", KataSandi: string(hashAdmin), Peran: "admin"},
+			{Nama: "Dosen Pengampu", Email: "dosen@example.com", KataSandi: string(hashDosen), Peran: "dosen"},
+			{Nama: "Mahasiswa Contoh", Email: "mahasiswa@example.com", KataSandi: string(hashMhs), Peran: "mahasiswa"},
+		}
+
+		DB.Create(&daftarPengguna)
+		log.Println("Data awal pengguna dibuat")
 	}
 }
