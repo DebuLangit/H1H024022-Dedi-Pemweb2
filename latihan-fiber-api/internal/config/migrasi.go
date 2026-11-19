@@ -54,18 +54,36 @@ func DataAwal() {
 
 	var jumlahPengguna int64
 	DB.Model(&model.Pengguna{}).Count(&jumlahPengguna)
-	if jumlahPengguna == 0 {
-		hashAdmin, _ := bcrypt.GenerateFromPassword([]byte("admin123"), bcrypt.DefaultCost)
-		hashDosen, _ := bcrypt.GenerateFromPassword([]byte("dosen123"), bcrypt.DefaultCost)
-		hashMhs, _ := bcrypt.GenerateFromPassword([]byte("mahasiswa123"), bcrypt.DefaultCost)
 
-		daftarPengguna := []model.Pengguna{
-			{Nama: "Administrator", Email: "admin@example.com", KataSandi: string(hashAdmin), Peran: "admin"},
-			{Nama: "Dosen Pengampu", Email: "dosen@example.com", KataSandi: string(hashDosen), Peran: "dosen"},
-			{Nama: "Mahasiswa Contoh", Email: "mahasiswa@example.com", KataSandi: string(hashMhs), Peran: "mahasiswa"},
+	// Pastikan akun demo tersedia, termasuk ketika tabel sudah berisi data lain.
+	daftarPengguna := []struct {
+		Nama      string
+		Email     string
+		KataSandi string
+		Peran     string
+	}{
+		{"Administrator", "admin@example.com", "admin123", "admin"},
+		{"Dosen Pengampu", "dosen@example.com", "dosen123", "dosen"},
+		{"Mahasiswa Contoh", "mahasiswa@example.com", "mahasiswa123", "mahasiswa"},
+	}
+
+	for _, item := range daftarPengguna {
+		var pengguna model.Pengguna
+		err := DB.Where("email = ?", item.Email).First(&pengguna).Error
+		if err == nil {
+			continue
 		}
 
-		DB.Create(&daftarPengguna)
+		hash, _ := bcrypt.GenerateFromPassword([]byte(item.KataSandi), bcrypt.DefaultCost)
+		DB.Create(&model.Pengguna{
+			Nama:      item.Nama,
+			Email:     item.Email,
+			KataSandi: string(hash),
+			Peran:     item.Peran,
+		})
+	}
+
+	if jumlahPengguna == 0 {
 		log.Println("Data awal pengguna dibuat")
 	}
 }

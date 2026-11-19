@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void {
         $this->call(ProgramStudiSeeder::class);
+        $this->call(PenggunaSeeder::class);
         Mahasiswa::factory()->count(30)->create();
 
         $this->call(MatakuliahSeeder::class);

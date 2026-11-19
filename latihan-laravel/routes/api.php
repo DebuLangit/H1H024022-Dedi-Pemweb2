@@ -39,6 +39,16 @@ Route::get('/status', function () {
     ]);
 });
 
+// Dipakai oleh formulir frontend untuk mengisi pilihan program studi.
+Route::get('/program-studi', function () {
+    return response()->json([
+        'sukses' => true,
+        'data' => ProgramStudi::query()
+            ->orderBy('nama')
+            ->get(['id', 'kode', 'nama', 'jenjang']),
+    ]);
+});
+
 // Route::apiResource('mahasiswa', MahasiswaController::class);
 
 Route::apiResource('matakuliah', MatakuliahController::class);
